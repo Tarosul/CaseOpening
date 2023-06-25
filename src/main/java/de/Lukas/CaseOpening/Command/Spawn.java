@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 public class Spawn implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player p = (Player) sender;
-        p.getInventory().addItem(new ItemBuilder(Material.ENDER_CHEST).setDisplayName("§5CaseOpening").setGlow().build());
+        Player player = (Player) sender;
+        player.getInventory().addItem(new ItemBuilder(Material.ENDER_CHEST).setDisplayName("§5CaseOpening").setGlow().build());
         return false;
     }
 }

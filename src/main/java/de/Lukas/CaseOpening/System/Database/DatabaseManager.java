@@ -6,34 +6,34 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DatabaseManager {
-    private String HOST;
-    private String PORT;
-    public static String DATABASE;
-    private String USER;
-    private String PASSWORD;
+    private String host;
+    private String port;
+    public static String database;
+    private String user;
+    private String password;
     private static Connection con;
-    boolean Connected = false;
+    boolean connected = false;
 
     public static boolean isConnected() {
         return con != null;
     }
 
     public DatabaseManager(String host, String port, String database, String user, String password) {
-        this.HOST = host;
-        this.PORT = port;
-        this.DATABASE = database;
-        this.USER = user;
-        this.PASSWORD = password;
+        this.host = host;
+        this.port = port;
+        this.database = database;
+        this.user = user;
+        this.password = password;
 
         connect();
     }
 
     public void connect() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://" + this.HOST + ":" + this.PORT + "/" + this.DATABASE + "?autoReconnect=true", this.USER, this.PASSWORD);
-            this.Connected = true;
+            con = DriverManager.getConnection("jdbc:postgresql://" + this.host + ":" + this.port + "/" + this.database + "?autoReconnect=true", this.user, this.password);
+            this.connected = true;
         } catch (SQLException e) {
-            this.Connected = false;
+            this.connected = false;
             System.out.println("Error!");
             System.out.println(e);
         }

@@ -26,13 +26,13 @@ public class CaseInventoryManager implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {
-        Player p = (Player)e.getWhoClicked();
+        Player player = (Player)e.getWhoClicked();
         if (e.getInventory() != null) {
             String invName = e.getView().getTitle();
             if (invName != null) {
                 e.setCancelled(true);
                 if (e.getClickedInventory() != null &&
-                        e.getClickedInventory().equals(p.getInventory()))
+                        e.getClickedInventory().equals(player.getInventory()))
                     e.setCancelled(false);
                 if (e.getCurrentItem() != null) {
                     CaseInventory inventory = this.inventoryObject.get(invName);
@@ -48,7 +48,7 @@ public class CaseInventoryManager implements Listener {
                     inventory.setShiftClick(e.isShiftClick());
                     inventory.setClickedSlot(e.getSlot());
                     inventory.setClickEvent(e);
-                    inventory.onClick(p, item);
+                    inventory.onClick(player, item);
                 }
             }
         }

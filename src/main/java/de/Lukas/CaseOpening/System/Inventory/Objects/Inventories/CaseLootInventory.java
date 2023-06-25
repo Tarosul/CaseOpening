@@ -20,10 +20,10 @@ public class CaseLootInventory extends de.Lukas.CaseOpening.System.Inventory.Obj
     }
 
     @Override
-    public void onOpenInventory(Player p) {
-        super.onOpenInventory(p);
-        p.playSound(p.getLocation(), Sound.BLOCK_CHEST_OPEN, 5.0f, 5.0f);
-        String caseType = cases.get(p.getUniqueId().toString());
+    public void onOpenInventory(Player player) {
+        super.onOpenInventory(player);
+        player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 5.0f, 5.0f);
+        String caseType = cases.get(player.getUniqueId().toString());
         for (int i = 0; i < LootManager.getCaseLootItems(caseType).size(); i++) {
             JsonElement jsonElement = LootManager.getCaseLootItems(caseType).get(i);
             Material mat = Material.valueOf(jsonElement.getAsJsonObject().get("item").getAsString());
@@ -38,11 +38,11 @@ public class CaseLootInventory extends de.Lukas.CaseOpening.System.Inventory.Obj
     }
 
     @Override
-    public void onClick(Player paramPlayer, ItemStack paramItemStack) {
+    public void onClick(Player player, ItemStack paramItemStack) {
         switch (getClickedSlot()) {
             case 45 -> {
-                CaseOpening.getCaseInventory("case").openInventory(paramPlayer);
-                paramPlayer.playSound(paramPlayer.getLocation(), Sound.BLOCK_BAMBOO_WOOD_DOOR_CLOSE, 0.5F, 1F);
+                CaseOpening.getCaseInventory("case").openInventory(player);
+                player.playSound(player.getLocation(), Sound.BLOCK_BAMBOO_WOOD_DOOR_CLOSE, 0.5F, 1F);
             }
         }
     }

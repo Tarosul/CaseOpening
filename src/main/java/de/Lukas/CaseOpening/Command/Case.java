@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 public class Case implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player p = (Player) sender;
+        Player player = (Player) sender;
 
         if (CaseType.isCreated(args[0])) {
             sender.sendMessage("§7Die Case vom Typ " + args[0] + " existiert bereits!");
@@ -26,7 +26,7 @@ public class Case implements CommandExecutor {
             e.printStackTrace();
         }
         String lore = "&7>> Du hast &b[AMOUNT]x &a" + args[1] + "&7-§aKiste /n&bLinksklick&7, um deine Kiste zu öffnen /n&cRechtsklick &7um den Kisteninhalt zu betrachten";
-        CaseAmount.register(p.getUniqueId().toString(), CaseType.getCaseType(args[0]).get("id").getAsString(), 20);
+        CaseAmount.register(player.getUniqueId().toString(), CaseType.getCaseType(args[0]).get("id").getAsString(), 20);
         String caseSlot = String.valueOf(CaseManager.getItems().size());
         CaseManager.addItem(args[0], args[2], args[1], lore, caseSlot, args[3]);
         sender.sendMessage("§7Du hast erfolgreich die §aCase §7" + args[1] + "( " + args[0],args[2] + " ) hinzugefügt.");

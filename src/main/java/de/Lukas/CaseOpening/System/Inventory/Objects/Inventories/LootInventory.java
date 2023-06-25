@@ -11,11 +11,11 @@ public class LootInventory extends CaseInventory {
     }
 
     @Override
-    public void onOpenInventory(Player p) {
-        super.onOpenInventory(p);
+    public void onOpenInventory(Player player) {
+        super.onOpenInventory(player);
     }
 
     @Override
-    public void onClick(Player paramPlayer, ItemStack paramItemStack) {
+    public void onClick(Player player, ItemStack paramItemStack) {
     }
 }

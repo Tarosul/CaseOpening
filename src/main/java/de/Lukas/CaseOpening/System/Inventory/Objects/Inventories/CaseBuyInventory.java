@@ -24,9 +24,9 @@ public class CaseBuyInventory extends CaseInventory {
     }
 
     @Override
-    public void onOpenInventory(Player p) {
-        super.onOpenInventory(p);
-        p.playSound(p.getLocation(), Sound.BLOCK_WOOD_STEP, 10.0f, 10.0f);
+    public void onOpenInventory(Player player) {
+        super.onOpenInventory(player);
+        player.playSound(player.getLocation(), Sound.BLOCK_WOOD_STEP, 10.0f, 10.0f);
         int slotMulti = 0;
         int chestAmount = 4;
         String lore = "§7Klicke, um §6AMOUNT §7Kisten für §6PRICE §7zu kaufen";
@@ -68,9 +68,9 @@ public class CaseBuyInventory extends CaseInventory {
     }
 
     @Override
-    public void onClick(Player paramPlayer, ItemStack paramItemStack) {
+    public void onClick(Player player, ItemStack paramItemStack) {
         int clickSlot = getClickedSlot();
-        String uuid = paramPlayer.getUniqueId().toString();
+        String uuid = player.getUniqueId().toString();
         for (int caseSlot : cases.keySet()) {
             if (caseSlot == clickSlot) {
                 JsonObject buyCase = cases.get(caseSlot).getAsJsonObject();
@@ -78,25 +78,25 @@ public class CaseBuyInventory extends CaseInventory {
                 int amount = buyCase.get("amount").getAsInt();
                 String type = buyCase.get("type").getAsString();
                 if (CooldownManager.isInCooldown(uuid, "buy")) {
-                    paramPlayer.sendMessage(CaseOpening.prefix + "Bitte warte noch " + CooldownManager.getTimeLeft(uuid, "buy") + " Sekunden.");
+                    player.sendMessage(CaseOpening.prefix + "Bitte warte noch " + CooldownManager.getTimeLeft(uuid, "buy") + " Sekunden.");
                     return;
                 }
                 int credits = Credits.getCredits(uuid);
                 if (!(credits >= price)) {
-                    paramPlayer.sendMessage(CaseOpening.prefix + "Du hast nicht genügend Credits.");
+                    player.sendMessage(CaseOpening.prefix + "Du hast nicht genügend Credits.");
                     return;
                 }
                 String caseId = CaseType.getCaseType(type).get("id").getAsString();
                 CaseAmount.setCases(uuid, caseId, CaseAmount.getCases(uuid, caseId) + amount);
                 Credits.setCredits(credits-price, uuid);
                 new CooldownManager(uuid, "buy", 3).start();
-                paramPlayer.playSound(paramPlayer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10.0f, 10.0f);
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10.0f, 10.0f);
             }
         }
         switch (clickSlot) {
             case 45 -> {
-                CaseOpening.getCaseInventory("case").openInventory(paramPlayer);
-                paramPlayer.playSound(paramPlayer.getLocation(), Sound.BLOCK_BAMBOO_WOOD_DOOR_CLOSE, 0.5F, 1F);
+                CaseOpening.getCaseInventory("case").openInventory(player);
+                player.playSound(player.getLocation(), Sound.BLOCK_BAMBOO_WOOD_DOOR_CLOSE, 0.5F, 1F);
             }
         }
     }

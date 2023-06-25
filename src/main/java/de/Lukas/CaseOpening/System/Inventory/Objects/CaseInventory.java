@@ -58,13 +58,13 @@ public abstract class CaseInventory {
         (CaseOpening.getCaseInventoryManager()).inventoryBySearchName.put(searchName, this);
     }
 
-    public void onOpenInventory(Player p) {
+    public void onOpenInventory(Player player) {
     }
 
     public void loadItems() {
     }
 
-    public abstract void onClick(Player paramPlayer, ItemStack paramItemStack);
+    public abstract void onClick(Player player, ItemStack paramItemStack);
 
 
     public boolean isWithoutDisplayname() {
@@ -125,11 +125,11 @@ public abstract class CaseInventory {
         return this.inv;
     }
 
-    public Inventory getInventory(Player p) {
+    public Inventory getInventory(Player player) {
         setInventory(Bukkit.createInventory(null, this.size * 9, this.invName));
         setupLayout(this.inv, getFill());
         loadItems();
-        onOpenInventory(p);
+        onOpenInventory(player);
         setInventory(this.inv);
         return this.inv;
     }
@@ -143,12 +143,12 @@ public abstract class CaseInventory {
         return this.items;
     }
 
-    public void openInventory(Player p) {
+    public void openInventory(Player player) {
         setInventory(Bukkit.createInventory(null, this.size * 9, this.invName));
         setupLayout(this.inv, getFill());
         loadItems();
-        onOpenInventory(p);
-        p.openInventory(this.inv);
+        onOpenInventory(player);
+        player.openInventory(this.inv);
         setInventory(this.inv);
     }
 
