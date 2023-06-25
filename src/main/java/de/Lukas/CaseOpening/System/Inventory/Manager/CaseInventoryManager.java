@@ -36,11 +36,13 @@ public class CaseInventoryManager implements Listener {
                     e.setCancelled(false);
                 if (e.getCurrentItem() != null) {
                     CaseInventory inventory = this.inventoryObject.get(invName);
-                    if (!inventory.isWithoutDisplayname()) {
-                        if (!e.getCurrentItem().hasItemMeta())
-                            return;
-                        if (!e.getCurrentItem().getItemMeta().hasDisplayName())
-                            return;
+                    if (inventory != null) {
+                        if (!inventory.isWithoutDisplayname()) {
+                            if (!e.getCurrentItem().hasItemMeta())
+                                return;
+                            if (!e.getCurrentItem().getItemMeta().hasDisplayName())
+                                return;
+                        }
                     }
                     ItemStack item = e.getCurrentItem();
                     inventory.setClickedInventory(e.getClickedInventory());
