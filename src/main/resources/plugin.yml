@@ -1,0 +1,12 @@
+name: CaseOpening
+author: Tarosul
+version: 1.0.0
+main: de.Lukas.CaseOpening.CaseOpening
+api-version: 1.19
+commands:
+  spawn:
+  item:
+    usage: /<command> sees sas
+  case:
+libraries:
+  - org.postgresql:postgresql:42.2.23
